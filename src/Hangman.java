@@ -13,7 +13,7 @@ public class Hangman {
         String s = getRandomWord();
         Word word = new Word(s);
         ArrayList<Character> guessed = new ArrayList();
-        int guessesLeft = s.length();
+        int guessesLeft = 6;
 
         Scanner scanner = new Scanner(System.in);
         while (!noose.isComplete() && !word.isGuessed()) {
@@ -30,18 +30,16 @@ public class Hangman {
 
             guessed.add(Character.toUpperCase(c));
             System.out.println("You have tried: " + guessed);
-            --guessesLeft;
-            System.out.println("You have " + guessesLeft + " guesses left.");
-
 
             if (word.guessLetter(c)) {
                 System.out.println("Correct!");
-//                guessed.add(c);
             } else {
                 System.out.println("Incorrect!");
                 noose.advance();
-//                guessed.add(c);
+                --guessesLeft;
             }
+            System.out.println("You have " + guessesLeft + " incorrect guesses left.");
+
         }
 
         System.out.println(noose);
