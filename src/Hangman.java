@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Hangman {
 
@@ -14,6 +12,7 @@ public class Hangman {
 
         String s = getRandomWord();
         Word word = new Word(s);
+        ArrayList<Character> guessed = new ArrayList();
 
         Scanner scanner = new Scanner(System.in);
         while (!noose.isComplete() && !word.isGuessed()) {
@@ -28,11 +27,17 @@ public class Hangman {
             System.out.print("Enter a letter to guess: ");
             char c = scanner.nextLine().charAt(0);
 
+            guessed.add(Character.toUpperCase(c));
+            System.out.println("You have tried: " + guessed);
+
+
             if (word.guessLetter(c)) {
                 System.out.println("Correct!");
+//                guessed.add(c);
             } else {
                 System.out.println("Incorrect!");
                 noose.advance();
+//                guessed.add(c);
             }
         }
 
